@@ -1,0 +1,87 @@
+﻿<style type="text/css">
+    venue-list .md-subheader, event-list .md-subheader, offer-list .md-subheader {
+        border-bottom: 1px solid #2C98CA;
+    }
+    .event-filter-box{
+        height: 120px;
+    }
+    .event-cat-btn{
+        width: 100px;
+        height: 40px;
+        -webkit-box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.67);
+        -moz-box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.67);
+        box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.67);
+        border:none;
+        border-radius: 25px;
+        background-color: white;
+        color: black;
+        text-transform: none;
+        font-weight: bold;
+        font-size: 11px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }   
+    .active{
+        background-color: #ffffff;
+        opacity: 0.5;
+        filter: alpha(opacity=50);
+    }
+    .md-focused{
+        background-color: none;
+    }
+    .md-button.md-default-theme:not([disabled]):hover, .md-button:not([disabled]):hover {
+        background-color: none;
+    }
+</style>
+<nav-menu></nav-menu>
+<div class="swipe-content-wrapper">
+    <div ng-repeat="month in months" class="swipe-content" ng-class="{'swipe-content-active': selectedMonth == month.month, 'swipe-content-left': isNextLeft(selectedMonth, month.month), 'swipe-content-right': isNextRight(selectedMonth, month.month)}">
+        <md-list>
+            <md-subheader class="md-no-sticky no-padding">
+                <div layout-align="center center" layout="row">
+                    <md-button ng-click="prevMonth()" ng-disabled="isFirst(month.month)">
+                        <md-icon class="material-icons">keyboard_arrow_left</md-icon>
+                    </md-button>
+                    {{month.name}}
+                    <md-button ng-click="nextMonth()" ng-disabled="isLast(month.month)">
+                        <md-icon class="material-icons">keyboard_arrow_right</md-icon>
+                    </md-button>
+                </div>
+                <div style="position: absolute; top: 0; right: 0; padding: 12px;">
+                    <md-icon class="material-icons" ng-click="openFilter()">filter_list</md-icon>
+                </div>
+            </md-subheader>
+            
+            <md-subheader class="md-no-sticky no-padding event-filter-box" ng-if="isShowFilter">
+                <md-list layout="row" layout-align="center center" layout-wrap>
+                    <span ng-repeat="category in categories">
+                        <button ng-if="category.isSelected"  class="event-cat-btn active" ng-click="selCategory($index)">{{category.DisplayName}}</button>
+                        <button ng-if="!category.isSelected"  class="event-cat-btn" ng-click="selCategory($index)">{{category.DisplayName}}</button>    
+                    </span>
+                </md-list>
+            </md-subheader>
+
+            <md-subheader class="md-no-sticky" ng-repeat-start="event in month.data | orderBy : 'date'" ng-if="data[$index - 1].date != event.date">
+                {{event.date | date}}
+            </md-subheader>
+            
+
+
+            <event-list-item data-event="event" ng-repeat-end="" swipe-text="Saved" swipe-icon="saved" swipe-action="addToFavourites(event)">
+            </event-list-item>
+            <md-list-item class="md-3-line list-divided" ng-if="!month.data">
+                <div class="md-list-item-text" layout-padding>
+                    <p>Loading...</p>
+                </div>
+            </md-list-item>
+
+            <md-list-item class="md-3-line list-divided" ng-if="month.data && month.data.length == 0">
+                <div class="md-list-item-text" layout-padding>
+                    <p>No events found.</p>
+                </div>
+            </md-list-item>
+        </md-list>
+    </div>
+</div>

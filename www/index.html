@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="PubHub">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *
+                           http://*.facebook.com
+                           https://*.facebook.com; 
+                           style-src  'self' 'unsafe-inline' *
+                           http://*.facebook.com
+                           https://*.facebook.com;">
+
+    <title>PubHub</title>
+
+    <!-- Angular Material style sheet -->
+    <script id="facebook-jssdk" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <link rel="stylesheet" href="css/angular-material.min.css">
+    <link href="css/angular-carousel.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/icon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/slider.css">
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+
+    <style type="text/css">
+        md-dialog.md-dialog-fullscreen {
+            min-height: 60%;
+            min-width: 70%;
+            border-radius: 0;
+            border-radius: 50px;
+            border: solid 1px #0098CA;
+            background-color: white;
+        }
+
+    </style>
+</head>
+<body layout="column">
+    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button>
+    <script type="text/javascript">
+        window.onerror = function (msg, url, line, col, error) {
+            // Note that col & error are new to the HTML 5 spec and may not be
+            // supported in every browser.  It worked for me in Chrome.
+            var extra = !col ? '' : '\ncolumn: ' + col;
+            extra += !error ? '' : '\nerror: ' + error;
+
+            // You can view the information in an alert to see things working like this:
+            alert("Error: " + msg + "\nurl: " + url + "\nline: " + line + extra);
+
+            // TODO: Report this error via ajax so you can keep track
+            //       of what pages have JS issues
+
+            //var suppressErrorAlert = true;
+            // If you return true, then error alerts (like in older versions of
+            // Internet Explorer) will be suppressed.
+            return suppressErrorAlert;
+        };
+    </script>
+
+    <div id="fb-root"></div>
+
+    <script src="cordova.js"></script>
+    <script src="cordova_plugins.js"></script>
+
+    <script type="text/javascript">
+       
+    </script>
+
+    <script src="scripts/jquery-3.1.0.js"></script>
+    <script src="scripts/lodash.min.js"></script>
+
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-touch.min.js"></script>
+    <script src="scripts/angular-animate.min.js"></script>
+    <script src="scripts/angular-aria.min.js"></script>
+    <script src="scripts/angular-messages.min.js"></script>
+    <script src="scripts/angular-route.min.js"></script>
+    <script src="scripts/angular-material.min.js"></script>
+    <script src="scripts/angular-filter.min.js"></script>
+    <!--<script src="scripts/angular-simple-slider.min.js"></script>-->
+    <script src="libs/ngCordova/dist/ng-cordova.js"></script>
+    <script type="text/javascript" src="libs/facebookConnectPlugin.js"></script>
+    <script src="scripts/ng-FitText.min.js"></script>
+
+    <script src="scripts/lodash.min.js"></script>
+
+    <script src="scripts/angular-simple-logger.js"></script>
+    <script src="scripts/angular-google-maps.min.js"></script>
+
+    <script src="app/slider/slider.directive.js"></script>
+    <script src="scripts/angular-carousel.min.js"></script>
+
+    <script src="app/app.module.js"></script>
+    <script src="app/app.config.js"></script>
+
+    <script src="app/core/pubhub.service.js"></script>
+    <script src="app/core/time-filter/time-filter.js"></script>
+    <script src="app/core/day-of-week-filter/day-of-week-filter.js"></script>
+    <script src="app/core/distance-filter/distance-filter.js"></script>
+    <script src="app/core/spinner/spinner.controller.js"></script>
+    <script src="app/core/login-form/login-form.controller.js"></script>
+    <script src="app/core/landing-form/landing-form.controller.js"></script>
+
+    <script src="app/core/nav-menu/nav-menu.component.js"></script>
+    <script src="app/core/nav-menu/nav-menu.controller.js"></script>
+    <script src="app/core/nav-menu/nav-menu.service.js"></script>
+
+    <script src="app/core/swipe-actions/swipe-actions.directive.js"></script>
+
+    <script src="app/offer/todays-offers/todays-offers.component.js"></script>
+    <script src="app/offer/todays-offers/todays-offers.controller.js"></script>
+    <script src="app/offer/offer-card/offer-card.component.js"></script>
+    <script src="app/offer/offer-card/offer-card.controller.js"></script>
+
+
+    <script src="app/search/search-screen/search-screen.component.js"></script>
+    <script src="app/search/search-screen/search-screen.controller.js"></script>
+
+    <script src="app/venue/venue-search/venue-search.component.js"></script>
+    <script src="app/venue/venue-search/venue-search.controller.js"></script>
+
+    <script src="app/venue/venue-list/venue-list.component.js"></script>
+    <script src="app/venue/venue-list/venue-list.controller.js"></script>
+
+    <script src="app/venue/venue-list-item/venue-list-item.component.js"></script>
+    <script src="app/venue/venue-list-item/venue-list-item.controller.js"></script>
+
+    <script src="app/venue/venue-detail/venue-detail.component.js"></script>
+    <script src="app/venue/venue-detail/venue-detail.controller.js"></script>
+
+    <script src="app/venue/venue-info/venue-info.component.js"></script>
+    <script src="app/venue/venue-info/venue-info.controller.js"></script>
+
+    <script src="app/venue/venue-map/venue-map.component.js"></script>
+    <script src="app/venue/venue-map/venue-map.controller.js"></script>
+
+    <script src="app/venue/venues/venues.component.js"></script>
+    <script src="app/venue/venues/venues.controller.js"></script>
+
+    <script src="app/offer/offer-list-item/offer-list-item.component.js"></script>
+    <script src="app/offer/offer-list-item/offer-list-item.controller.js"></script>
+
+    <script src="app/offer/offer-list/offer-list.component.js"></script>
+    <script src="app/offer/offer-list/offer-list.controller.js"></script>
+
+    <script src="app/event/event-search/event-search.component.js"></script>
+    <script src="app/event/event-search/event-search.controller.js"></script>
+
+    <script src="app/event/event-list-item/event-list-item.component.js"></script>
+    <script src="app/event/event-list-item/event-list-item.controller.js"></script>
+
+
+    <script src="app/event/event-list/event-list.component.js"></script>
+    <script src="app/event/event-list/event-list.controller.js"></script>
+
+    <script src="app/menu/menu-list/menu-list.component.js"></script>
+    <script src="app/menu/menu-list/menu-list.controller.js"></script>
+
+    <script src="app/favourite/favourite-list/favourite-list.component.js"></script>
+    <script src="app/favourite/favourite-list/favourite-list.controller.js"></script>
+
+
+    <div layout="column" style="height: 100%;">
+        <spinner></spinner>
+        <!--<nav-menu></nav-menu>-->
+        <md-content class="main-content" style="height: 100%;background-color: #2C98CA;">
+            <div ng-view></div>
+        </md-content>
+    </div>
+</body>
+</html>

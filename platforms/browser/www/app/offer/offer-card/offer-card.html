@@ -1,0 +1,26 @@
+﻿
+<md-card class="todays-offers" ng-repeat="offer in $ctrl.offer">
+    <md-card-header>
+        <md-card-header-text>
+            <!--<p class="md-title">{{$ctrl.offer.displayName}}</p>-->
+            <p class="md-title">{{offer.venue.displayName}}</p>
+        </md-card-header-text>
+    </md-card-header>
+    <div class="card-image">
+        <img ng-src="{{ $ctrl.getOfferUrl(offer) }}" onerror="this.src = 'images/missing_offer_large.png';" class="md-card-image">
+        <span ng-if="offer.date" class="card-date">{{offer.date | date}}</span>
+        <span class="card-description">{{offer.description}}</span>
+    </div>
+    <md-card-content layout="row" ng-click="openVenue(offer);">
+        <div layout="column">
+            <img src="images/pin.svg" style="height: 50px; padding-top: 10px;" />
+        </div>
+        <div layout="column">
+            <span class="venueName">{{offer.venue.displayName}}</span>
+            <span class="distance">{{offer.venue.distance / 1000 | distance}}</span>
+            <span class="suburb">{{offer.venue.suburb}}</span>
+        </div>
+    </md-card-content>
+    <div class="favIcon"></div>
+    <div class="skipIcon"></div>
+</md-card>

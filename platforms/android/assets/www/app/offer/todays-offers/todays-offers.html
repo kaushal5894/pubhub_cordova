@@ -1,0 +1,38 @@
+﻿<nav-menu></nav-menu>
+<div class="full-screen">
+<div class="swipe-content-wrapper">
+    <div ng-repeat="day in days" class="swipe-content" ng-class="{'swipe-content-active': selectedDay == day.day, 'swipe-content-left': isNextLeft(selectedDay, day.day), 'swipe-content-right': isNextRight(selectedDay, day.day)}">
+
+         <md-list>
+            <md-subheader class="md-no-sticky no-padding">
+                <div layout-align="center center" layout="row">
+                    <md-button ng-click="prevDay()">
+                        <md-icon class="material-icons">keyboard_arrow_left</md-icon>
+                    </md-button>
+                    {{day.name}}
+                    <md-button ng-click="nextDay()">
+                        <md-icon class="material-icons">keyboard_arrow_right</md-icon>
+                    </md-button>
+                </div>
+                <div style="position: absolute; top: 0; right: 0; padding: 12px;">
+                    <md-icon class="material-icons" ng-click="openFilter()">filter_list</md-icon>
+                </div>
+            </md-subheader>
+        </md-list>
+
+
+
+        <div ng-class="{'card-skipping': skipping}">
+            <div ng-repeat="offer in $ctrl.filterOffers(day) | orderBy : '-' track by offer.whatsOnId  " class="stacked-card">
+                <div class="slider" slider="slider" slider-next="skip(offer)" slider-next-start="skipStart(offer)"
+                     slider-swipe-left="dislike(offer)" slider-swipe-right="addFavourite(offer)" slider-swipe-start="skipStart(offer)">
+                    <div class="slide-wrapper">
+                        <offer-card data-offer="offer"></offer-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+
+</div>
+</div>

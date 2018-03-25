@@ -1,0 +1,30 @@
+﻿<md-list>
+
+    <div class="map-overlay" ng-click="showMapSection()" md-swipe-down="showMapSection()" ng-if="!showMap">
+    </div>
+        <venue-map venues="$ctrl.venues"></venue-map>
+    <md-list-item class="md-subheader" ng-click="showVenueSection()" layout="row">
+        <div class="md-list-item-text">
+            <p>Search for Venues</p>
+        </div>
+        <div class="md-secondary">
+            <md-icon class="material-icons animate" ng-class="{'rotate-180': showVenues }">expand_less</md-icon>
+        </div>
+    </md-list-item>
+    <md-list-item class="md-3-line animate-repeat no-padding" ng-if="showVenues" layout="row">
+        <venue-search></venue-search>
+    </md-list-item>
+
+    <md-list-item id="eventsSection" class="md-subheader" ng-click="showEventsSection(); " layout="row">
+        <div class="md-list-item-text">
+            <p>Search for Whats On</p>
+        </div>
+        <div class="md-secondary">
+            <md-icon class="material-icons animate" ng-class="{'rotate-180': showEvents }">expand_less</md-icon>
+        </div>
+    </md-list-item>
+    <md-list-item class="md-3-line animate-repeat no-padding" ng-if="showEvents" layout="row">
+        <event-search></event-search>
+    </md-list-item>
+
+</md-list>

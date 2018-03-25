@@ -1,0 +1,32 @@
+﻿<md-list-item class="md-3-line" ng-click="$ctrl.toggleCard()" layout="row" ng-href="" swipe-actions="test" swipped="swipped" swipe-left="$ctrl.swipe()" swipe-right="$ctrl.swipeAction()">
+    <div class="swipe-actions-left">
+        <img ng-src="images/{{$ctrl.swipeIcon}}.png" style="height: 40px" />
+    </div>
+    <div class="swipe-actions-left swipe-done">
+        <span>{{$ctrl.swipeText}}</span>
+    </div>
+
+    <div layout="row" layout-fill class="swipe-actions-item">
+        <div flex="33">
+            <div layout="row" layout-align="center center" style="height: 100%">
+                <img ng-src="{{$ctrl.getEventImage($ctrl.event)}}" onerror="this.src = 'images/missing_event_small.png';" style="height: 27.6vw;" >
+            </div>
+        </div>
+        <div class="md-list-item-text" flex="66" style="padding-left: 8px;">
+            <h4>{{ $ctrl.event.venue.displayName }}</h4>
+            <h3><b>{{ $ctrl.event.displayName }}</b></h3>
+            <h4>{{ $ctrl.event.date | date }}</h4>
+            <p class="small">{{ $ctrl.event.startTime | timespan}} <span ng-if="$ctrl.event.endTime">to {{ $ctrl.event.endTime | timespan}}</span></p>
+            <p class="small">{{ $ctrl.event.price }}</p>
+        </div>
+    </div>
+
+    <div class="swipe-actions-right">
+        <img ng-src="images/{{$ctrl.swipeIcon}}.png" style="height: 40px" />
+    </div>
+    <div class="swipe-actions-right swipe-done">
+        <!--<a ng-click="swipped=null">UNDO</a>-->
+    </div>
+
+
+</md-list-item>

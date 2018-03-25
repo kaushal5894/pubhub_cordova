@@ -1,0 +1,54 @@
+<style type="text/css">
+    .wats-on-filter-header{
+        height: 50px;
+        text-align: center;
+        padding-left: 25px;
+        padding-right: 25px;
+        padding-top: 25px;
+    }
+    .categories-list{
+
+    }
+    .categories-list-item{
+      height: 70px;
+      text-align: center;
+    }
+    .cat-btn{
+      width: 100px;
+      height: 40px;
+      -webkit-box-shadow: 3px 4px 5px 2px rgba(0,0,0,0.67);
+      -moz-box-shadow: 3px 4px 5px 2px rgba(0,0,0,0.67);
+      box-shadow: 3px 4px 5px 2px rgba(0,0,0,0.67);
+      border:none;
+      border-radius: 25px;
+      background-color: white;
+    }
+    .cat-btn.active{
+      background-color: #0098CA;
+    }
+    .go-box{
+      height: 70px;
+      text-align: center;
+    }
+    .go-btn{
+      width: 150px;
+      height: 50px;
+      -webkit-box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.67);
+      -moz-box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.67);
+      box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.67);
+      border:none;
+      border-radius: 25px;
+      background-color: #0098CA;
+      font-size: 35px;
+    }
+</style>
+<div class="wats-on-filter">
+    <div class="wats-on-filter-header">Select card categories you'd like <br>to see</div>
+    <div class="categories-list">
+      <div class="categories-list-item" ng-repeat="category in categories">
+        <button ng-if="category.isSelected" class="cat-btn active" ng-click="selCategory($index)">{{category.DisplayName}}</button>
+        <button ng-if="!category.isSelected" class="cat-btn" ng-click="selCategory($index)">{{category.DisplayName}}</button>
+      </div>
+    </div>
+    <div class="go-box"><button class="go-btn" ng-click="search()">GO!</button></div>
+</div>

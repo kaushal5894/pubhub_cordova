@@ -1,0 +1,57 @@
+
+.animate {
+    -ms-transition: transform 500ms ease-out 0ms, opacity ease-out;
+    -o-transition: transform 500ms ease-out 0ms, opacity ease-out;
+    -webkit-transition: transform 500ms ease-out 0ms, opacity ease-out;
+    transition: transform 500ms ease-out 0ms, opacity ease-out;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.slider {
+    width: 100%;
+    /*overflow-x: hidden;*/
+}
+
+.ms-touch.slider {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -ms-overflow-style: none;
+    /* Hides the scrollbar. */
+    -ms-scroll-chaining: none;
+    /* Prevents Metro from swiping to the next tab or app. */
+    -ms-scroll-snap-type: mandatory;
+    /* Forces a snap scroll behavior on your images. */
+    -ms-scroll-snap-points-x: snapInterval(0%, 100%);
+    /* Defines the y and x intervals to snap to when scrolling. */
+}
+
+.slide-wrapper {
+    -ms-transform: translate3d(0,0,0);
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    -webkit-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
+    -ms-transform-origin: 50% 99%;
+    -o-transform-origin: 50% 99%;
+    -webkit-transform-origin: 50% 99%;
+    transform-origin: 50% 99%;
+    opacity: 1;
+}
+
+.slide {
+    height: 100%;
+    position: relative;
+}

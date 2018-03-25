@@ -1,0 +1,52 @@
+﻿<nav-menu></nav-menu>
+<md-tabs md-dynamic-height md-border-bottom md-selected="currentTab">
+    <md-tab label="Venues">
+        <md-content>
+            <md-list>
+                <md-subheader ng-repeat-start="(suburb, value) in $ctrl.venues | groupBy : 'suburb' | toArray: true | orderBy: $ctrl.sortSuburb track by suburb" class="md-no-sticky">
+                    <div layout-align="center center" layout="row">
+                        {{value.$key}}
+                    </div>
+                </md-subheader>
+                <venue-list-item ng-repeat="venue in value | orderBy: venue.distance" venue="venue" swipe-icon="{{$ctrl.swipeIcon || 'saved'}}" swipe-text="{{$ctrl.swipeText || 'Removed'}}"
+                                 swipe-action="$ctrl.deleteVenueFromFavourites(venue)"></venue-list-item>
+                <div ng-repeat-end></div>
+                <md-list-item class="md-3-line list-divided" ng-if="!$ctrl.venues">
+                    <div class="md-list-item-text" layout-padding>
+                        <p>Searching for venues near you...</p>
+                    </div>
+                </md-list-item>
+                <md-list-item class="md-3-line list-divided" ng-if="$ctrl.venues && $ctrl.venues.length == 0">
+                    <div class="md-list-item-text" layout-padding>
+                        <p>No venues found.</p>
+                    </div>
+                </md-list-item>
+            </md-list>
+
+        </md-content>
+    </md-tab>
+    <md-tab label="Offers">
+        <md-content>
+            <md-list>
+                <md-subheader class="md-no-sticky" ng-repeat-start="day in days" ng-if="day.offers && day.offers.length">
+                    <div layout-align="center center" layout="row">
+                        {{day.name}}
+                    </div>
+                </md-subheader>
+                <offer-list-item data-offer="offer" ng-repeat="offer in getDayOffers(day)" ng-repeat-end="" swipe-text="Removed" swipe-icon="delete" swipe-action="$ctrl.deleteOfferFromFavourites(offer)">
+                </offer-list-item>
+            </md-list>
+        </md-content>
+    </md-tab>
+    <md-tab label="Events">
+        <md-list>
+            <md-subheader class="md-no-sticky" ng-repeat-start="month in months" ng-if="month.events && month.events.length" layout-align="center center">
+                <div layout-align="center center" layout="row">
+                    {{month.name}}
+                </div>
+            </md-subheader>
+            <event-list-item data-event="event" ng-repeat="event in getMonthEvents(month)" ng-repeat-end="" swipe-text="Removed" swipe-icon="delete" swipe-action="$ctrl.deleteEventFromFavourites(event)">
+            </event-list-item>
+        </md-list>
+    </md-tab>
+</md-tabs>

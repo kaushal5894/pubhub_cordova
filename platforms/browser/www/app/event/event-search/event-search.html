@@ -1,0 +1,51 @@
+﻿<md-content layout="row">
+    <ng-form name="eventSearchForm">
+        <md-list flex>
+            <md-list-item>
+                <form name="keywordForm" ng-submit="hideKeyboard()">
+                    <md-input-container flex="100" md-no-float style="margin-bottom: 0;">
+                        <md-icon>search</md-icon>
+                            <input name="searchKeywords" placeholder="Enter Keywords to Search" ng-model="searchKeyWords">
+                    </md-input-container>
+                </form>
+            </md-list-item>
+            <md-list-item>
+                <span class="md-caption">
+                    Enter keywords to perform a quick search.  You can enter multiple key words to get the best results. e.g. 'Melbourne Steak Trivia'
+                </span>
+            </md-list-item>
+            <md-subheader class="md-no-sticky">Quick Filters</md-subheader>
+
+            <md-list-item layout="row">
+                <md-button name="offers" class="md-raised" ng-click="searchFor = 'offers'" ng-class="{'md-primary' : searchFor == 'offers'}" flex="50">
+                    Offers / Activities
+                </md-button>
+                <md-button name="events" class="md-raised" ng-click="searchFor = 'events'" ng-class="{'md-primary' : searchFor == 'events'}" flex="50">
+                    Events
+                </md-button>
+            </md-list-item>
+            <md-subheader class="md-no-sticky">Starting Date</md-subheader>
+            <md-list-item>
+                <form name="dateForm" ng-submit="hideKeyboard()">
+                    <md-datepicker name="date" ng-model="myDate" md-placeholder="Starting Date"></md-datepicker>
+                </form>
+            </md-list-item>
+
+            <md-subheader class="md-no-sticky">Sort By</md-subheader>
+            <md-list-item layout="row">
+                <md-button name="distance" class="md-raised" ng-click="sort = 'distance'" ng-class="{'md-primary' : sort == 'distance'}" flex="50">
+                    <md-icon class="material-icons">pin_drop</md-icon>
+                    Distance
+                </md-button>
+                <md-button name="price" class="md-raised" ng-click="sort = 'price'" ng-class="{'md-primary' : sort == 'price'}" flex="50">
+                    <md-icon class="material-icons">attach_money</md-icon>
+                    Price
+                </md-button>
+            </md-list-item>
+
+            <md-content layout="row" layout-align="center center">
+                <md-button class="md-raised md-primary" ng-click="search()" flex>Search</md-button>
+            </md-content>
+        </md-list>
+    </ng-form>
+</md-content>

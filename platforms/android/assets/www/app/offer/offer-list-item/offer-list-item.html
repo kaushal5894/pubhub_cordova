@@ -1,0 +1,40 @@
+﻿<md-list-item class="md-3-line list-divided" ng-click="$ctrl.toggleCard()" layout="row" ng-href="" swipe-actions="test" swipped="swipped" swipe-left="$ctrl.swipeAction()" swipe-right="$ctrl.swipeAction()">
+    <div class="swipe-actions-left">
+        <img ng-src="images/{{$ctrl.swipeIcon}}.png" style="height: 40px" />
+    </div>
+    <div class="swipe-actions-left swipe-done">
+        <span>{{$ctrl.swipeText}}</span>
+    </div>
+
+    <div layout="row" layout-fill class="swipe-actions-item">
+        <div flex="33">
+            <div layout="row" layout-align="center center" style="height: 100%">
+                <img ng-src="{{$ctrl.getOfferImage($ctrl.offer)}}" onerror="this.src = 'images/missing_offer_small.png';" style="height: 27.6vw;" >
+            </div>
+        </div>
+        <div class="md-list-item-text" flex="66" style="padding-left: 8px;">
+            <h4>{{ $ctrl.offer.venue.displayName }}</h4>
+            <h3><b>{{ $ctrl.offer.displayName }}</b></h3>
+            <p class="small">{{ $ctrl.offer.startTime | timespan}} <span ng-if="$ctrl.offer.endTime">to {{ $ctrl.offer.endTime | timespan}}</span></p>
+            <p class="small">{{ $ctrl.offer.price }}</p>
+        </div>
+
+
+    </div>
+
+    <div class="swipe-actions-right">
+        <img ng-src="images/{{$ctrl.swipeIcon}}.png" style="height: 40px" />
+    </div>
+    <div class="swipe-actions-right swipe-done">
+        <!--<a ng-click="swipped=null">UNDO</a>-->
+    </div>
+
+
+</md-list-item>
+
+<div class="full-screen" style="z-index: 998; background-color: black; opacity: 0.6" ng-if="$ctrl.showCard" ng-click="$ctrl.toggleCard()">
+</div>
+
+<div class="full-screen" style="z-index: 999;" ng-if="$ctrl.showCard" ng-click="$ctrl.toggleCard()">
+    <offer-card data-offer="$ctrl.offer"></offer-card>
+</div>

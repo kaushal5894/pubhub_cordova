@@ -1,0 +1,83 @@
+﻿<div layout="row">
+    <ul ng-if="venue.images && venue.images.length" rn-carousel class="image" rn-carousel-index="carouselIndex" rn-carousel-auto-slide rn-carousel-pause-on-hover rn-carousel-buffered>
+        <li ng-repeat="img in venue.images">
+            <img ng-src="{{ $ctrl.getCarouselImage(img) }}"  onerror="this.src='images/missing_banner.png'" alt="{{venue.displayName}}" />
+        </li>
+    </ul>
+    <img ng-if="!venue.images || !venue.images.length" src="images/missing_banner.png" alt="{{venue.displayName}}" />
+</div>
+<div rn-carousel-indicators ng-if="venue.images && venue.images.length > 1" slides="venue.images" rn-carousel-index="carouselIndex"></div>
+<md-list>
+    <md-list-item class="md-3-line" ng-repeat-end layout="row">
+        <div flex="33">
+            <div layout="row" layout-align="center center" style="height: 100%">
+                <img ng-src="{{ $ctrl.getLogoUrl(venue) }}" onerror="this.src = 'images/missing_logo.png';" alt="{{venue.displayName}}" style="width: 100%;" />
+            </div>
+        </div>
+        <div class="md-list-item-text" flex="66" style="padding-left: 16px">
+            <h3 class="md-headline">{{ venue.displayName }}</h3>
+            <h4 class="md-subhead" ng-click="$ctrl.NavigateToVenue(venue)">{{ venue.address1 }}</h4>
+            <h4 class="md-title" ng-click="$ctrl.NavigateToVenue(venue)">
+                <img src="images/pin.svg" style="height: 16px;" />
+                {{venue.distance / 1000 | distance}}
+            </h4>
+            <p><a class="link-text" ng-href="tel:{{ venue.phone }}">{{ venue.phone }}</a></p>
+        </div>
+    </md-list-item>
+</md-list>
+<md-tabs md-dynamic-height md-border-bottom md-selected="currentTab" md-stretch-tabs="never">
+    <md-tab>
+        <md-tab-label>
+            <img alt="Offers" ng-src="{{ tabImage('offers', 0) }}" />
+        </md-tab-label>
+        <md-tab-body>
+            <md-content>
+                <md-list>
+                    <md-subheader class="md-no-sticky" ng-repeat-start="day in days" ng-if="day.offers && day.offers.length">
+                        {{day.name}}
+                    </md-subheader>
+                    <offer-list-item data-offer="offer" ng-repeat="offer in getDayOffers(venue, day)" ng-repeat-end="" swipe-text="Saved" swipe-icon="saved">
+                    </offer-list-item>
+                </md-list>
+            </md-content>
+        </md-tab-body>
+    </md-tab>
+    <md-tab>
+        <md-tab-label>
+            <img alt="Events" ng-src="{{ tabImage('events', 1) }}" />
+        </md-tab-label>
+        <md-tab-body>
+            <md-content>
+                <md-list>
+                    <md-subheader class="md-no-sticky" ng-repeat-start="month in months" ng-if="month.events && month.events.length">
+                        {{month.name}}
+                    </md-subheader>
+                    <event-list-item data-event="event" ng-repeat="event in getMonthEvents(venue, month)" ng-repeat-end="" swipe-text="Saved" swipe-icon="saved">
+                    </event-list-item>
+                </md-list>
+            </md-content>
+        </md-tab-body>
+    </md-tab>
+    <md-tab>
+        <md-tab-label>
+            <img alt="Info" ng-src="{{ tabImage('info', 2) }}" />
+        </md-tab-label>
+        <md-tab-body>
+            <md-content>
+                <venue-info venue="venue"></venue-info>
+            </md-content>
+        </md-tab-body>
+    </md-tab>
+    <md-tab>
+        <md-tab-label>
+            <img alt="Menu" ng-src="{{ tabImage('menu', 3) }}" />
+        </md-tab-label>
+        <md-tab-body>
+            <md-content>
+                <menu-list menus="venue.menus"></menu-list>
+            </md-content>
+        </md-tab-body>
+    </md-tab>
+</md-tabs>
+
+

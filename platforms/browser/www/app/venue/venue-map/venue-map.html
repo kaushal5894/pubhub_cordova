@@ -1,0 +1,30 @@
+﻿
+<div class="map-popup" ng-if="selectedVenue">
+    <md-list>
+        <md-list-item class="md-3-line" ng-repeat-end ng-href="#!/venues/{{selectedVenue.id}}">
+            <div layout="row" layout-fill>
+                <div class="md-list-item-text" flex="66">
+                    <h3>{{ selectedVenue.DisplayName }}</h3>
+                    <p>
+                        {{ selectedVenue.Address1 }}<br />
+                        {{ selectedVenue.Suburb }}
+                    </p>
+                </div>
+                <div flex="33">
+                    <div layout="row" layout-align="center center" style="height: 100%">
+                        <img ng-src="{{ $ctrl.getLogoUrl(selectedVenue) }}" onerror="this.src = 'images/missing_logo.png';" alt="{{selectedVenue.DisplayName}}" style="width: 100%;" />
+                    </div>
+                </div>
+            </div>
+        </md-list-item>
+    </md-list>
+</div>
+<md-content>
+    <div ng-if="map">
+        <ui-gmap-google-map ng-if="map" center='map.center' zoom='map.zoom' events="map.events" control="map.control">
+            <ui-gmap-markers models="markers" coords="'location'" icon="'pinIcon'" click="onClick" options="'options'">
+
+            </ui-gmap-markers>
+        </ui-gmap-google-map>
+    </div>
+</md-content>

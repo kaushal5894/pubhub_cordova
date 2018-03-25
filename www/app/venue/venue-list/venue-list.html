@@ -1,0 +1,35 @@
+﻿<md-list>
+    <md-subheader ng-repeat-start="(suburb, value) in $ctrl.venues | groupBy : 'suburb' | toArray: true | orderBy: $ctrl.sortSuburb track by suburb" class="md-no-sticky">
+        <div layout-align="center center" layout="row">
+            {{value.$key}}
+            <div style="position: absolute; top: 0; right: 0;">
+                <a href="#!/search/venues">
+                    <md-icon class="material-icons">search</md-icon>
+                </a>
+            </div>
+        </div>
+    </md-subheader>
+    <venue-list-item ng-repeat="venue in value | orderBy: $ctrl.getDistance" venue="venue" swipe-icon="{{$ctrl.swipeIcon || 'saved'}}" swipe-text="{{$ctrl.swipeText || 'Saved'}}"
+                     swipe-action="$ctrl.addToFavourites(venue)"></venue-list-item>
+    <div ng-repeat-end></div>
+    <md-list-item class="md-3-line list-divided" ng-if="!$ctrl.venues">
+        <div class="md-list-item-text" layout-padding>
+            <p>Searching for venues near you...</p>
+        </div>
+    </md-list-item>
+    <md-subheader class="md-no-sticky" ng-if="$ctrl.venues && $ctrl.venues.length == 0">
+        <div layout-align="center center" layout="row">
+            No venues found
+            <div style="position: absolute; top: 0; right: 0;">
+                <a href="#!/search/venues">
+                    <md-icon class="material-icons">search</md-icon>
+                </a>
+            </div>
+        </div>
+    </md-subheader>
+    <md-list-item class="md-3-line list-divided" ng-if="$ctrl.venues && $ctrl.venues.length == 0">
+        <div class="md-list-item-text" layout-padding>
+            <p>No venues were found that matched you criteria.</p>
+        </div>
+    </md-list-item>
+</md-list>

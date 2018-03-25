@@ -1,0 +1,36 @@
+﻿<div class="full-screen back-logo" ng-class="{loading: hideLogin}">
+    <md-content layout-padding class="center-screen" style="width: 80%;">
+        <div>
+            <md-input-container layout="row">
+                <label>Email</label>
+                <input ng-model="$ctrl.user.email">
+            </md-input-container>
+            <md-input-container layout="row">
+                <label>Password</label>
+                <input ng-model="$ctrl.user.password" type="password">
+            </md-input-container>
+            <md-content layout="row">
+                <md-button class="md-raised md-primary" ng-click="login()" ng-if="!signUpMode" flex>Sign In</md-button>
+            </md-content>
+            <md-content layout="row">
+                <md-button class="md-raised md-primary" ng-click="loginFB()" ng-if="!signUpMode" flex>
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i> Sign In with Facebook
+                </md-button>
+            </md-content>
+            <md-content layout="row">
+                <md-button class="md-raised md-primary" ng-click="signUp()" ng-if="signUpMode" flex>Sign Up</md-button>
+            </md-content>
+            <md-content layout="row" ng-if="!signUpMode">
+                <md-button class="md-primary" ng-click="showSignup()" flex>
+                    Sign Up
+                </md-button>
+            </md-content>
+            <!--<md-content layout="row">
+                <md-button class="md-raised md-primary" ng-click="login()" flex>
+                    <i class="fa fa-google-plus-official" aria-hidden="true"></i> Sign In with Google+
+                </md-button>
+            </md-content>-->
+
+        </div>
+    </md-content>
+</div>

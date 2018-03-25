@@ -1,0 +1,36 @@
+﻿<md-list>
+    <md-subheader class="md-no-sticky">
+        Description
+    </md-subheader>
+    <md-list-item>
+        <md-content>
+            <p>{{ $ctrl.venue.description }}</p>
+        </md-content>
+    </md-list-item>
+    <md-subheader class="md-no-sticky">
+        Opening Hours
+    </md-subheader>
+    <md-list-item ng-repeat="day in $ctrl.venue.openingTimes">
+        <p>
+            {{day.dayOfWeek | dayOfWeek}}:
+            <span ng-if="day.isClosed" style="color: red;">Closed</span>
+            <span ng-if="!day.isClosed">{{day.opening | timespan}} - {{day.closing | timespan}}  </span>
+        </p>
+    </md-list-item>
+    <md-subheader class="md-no-sticky">
+        Features
+    </md-subheader>
+    <md-list-item layout="row" layout-wrap>
+        <md-list-item ng-repeat="feature in $ctrl.venue.features" flex="33">
+            <md-content style="text-align: center; width: 100%;">
+                <p class="small">
+                    <img ng-src="https://pubhubmediaprod.blob.core.windows.net/features/{{feature.featureId}}.svg" alt="feature.displayName" style="height:32px; vertical-align: middle;" />
+                    <br />
+                    {{feature.displayName}}
+                </p>
+            </md-content>
+        </md-list-item>
+    </md-list-item>
+</md-list>
+
+

@@ -1,0 +1,123 @@
+﻿<md-toolbar>
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" ng-click="open()">
+            <md-icon>menu</md-icon>
+        </md-button>
+        <h1 class="md-toolbar-tools" layout-align="center center">{{pageTitle()}}</h1>
+        <a href="#!/landing">
+            <img src="css/logo_white.svg" style="height: 50px;" />
+        </a>
+    </div>
+</md-toolbar>
+<!--
+<md-toolbar ng-if="showPreview()">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button">
+            <md-icon>menu</md-icon>
+        </md-button>
+        <h1 class="md-toolbar-tools" layout-align="center center">Preview</h1>
+        <a href="">
+            <img src="css/logo_white.svg" style="height: 50px;" />
+        </a>
+    </div>
+</md-toolbar>-->
+<!--
+<md-toolbar ng-if="showNav()">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" ng-click="open()">
+            <md-icon>menu</md-icon>
+        </md-button>
+        <h1 class="md-toolbar-tools" layout-align="center center">{{pageTitle()}}</h1>
+        <a href="#!/todaysOffers">
+            <img src="css/logo_white.svg" style="height: 50px;" />
+        </a>
+    </div>
+</md-toolbar>
+<md-toolbar ng-if="showPreview()">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button">
+            <md-icon>menu</md-icon>
+        </md-button>
+        <h1 class="md-toolbar-tools" layout-align="center center">Preview</h1>
+        <a href="">
+            <img src="css/logo_white.svg" style="height: 50px;" />
+        </a>
+    </div>
+</md-toolbar>-->
+
+<md-sidenav class="md-sidenav-left" md-component-id="leftNav" md-swipe-left="close()">
+    <md-list>
+        <md-list-item ng-repeat="item in menuItems" ng-click="navigate(item)" aria-label="{{item.name}}">
+            <img ng-src="images/menu/{{item.icon}}.png" alt="{{item.name}}" style="height: 16.6666667vh; height: calc(100vh / 6)" />
+        </md-list-item>
+    </md-list>
+
+</md-sidenav>
+
+<md-sidenav class="md-sidenav-right md-whiteframe-4dp sidenav-filter" md-component-id="filter">
+
+    <md-toolbar class="md-theme-light">
+        <div class="md-toolbar-tools">
+        <h2>
+        <span>Filters</span>
+        </h2>
+            <span flex></span>
+        <md-button class="md-icon-button" aria-label="Done" ng-click="closeFilter('filter')">
+          <md-icon>done</md-icon>
+        </md-button>
+        </div>
+    </md-toolbar>
+    <md-content >
+        <md-list>
+            <md-list-item class="md-subheader" layout="row" ng-click="showCategory = !showCategory" >
+                <div class="md-list-item-text">
+                    Category
+                </div>
+                <div class="md-secondary">
+                    <md-icon class="material-icons animate" ng-class="{'rotate-180': showCategory }">expand_less</md-icon>
+                </div>
+            </md-list-item>
+
+            <md-list-item ng-repeat="category in filterCategories()" class="animate-repeat" ng-if="showCategory">
+                <p> {{ category.DisplayName }} </p>
+                <md-checkbox class="md-secondary" ng-model="category.selected"></md-checkbox>
+            </md-list-item>
+
+            <md-list-item class="md-subheader" layout="row" ng-click="showSubCategory = !showSubCategory">
+                <div class="md-list-item-text">
+                    Sub Category
+                </div>
+                <div class="md-secondary">
+                    <md-icon class="material-icons animate" ng-class="{'rotate-180': showSubCategory }">expand_less</md-icon>
+                </div>
+            </md-list-item>
+            <md-list-item ng-if="showSubCategory && !subCategories().length" class="animate-repeat">
+                <div class="md-list-item-text">
+                    Please select a category first
+                </div>
+            </md-list-item>
+            <md-list-item ng-repeat="category in subCategories() | orderBy : 'DisplayName'" class="animate-repeat" ng-if="showSubCategory">
+                <p> {{ category.DisplayName }} </p>
+                <md-checkbox class="md-secondary" ng-model="category.selected"></md-checkbox>
+            </md-list-item>
+
+            <md-list-item class="md-subheader" layout="row" ng-click="showFeatures = !showFeatures">
+                <div class="md-list-item-text">
+                    Venue Features
+                </div>
+                <div class="md-secondary">
+                    <md-icon class="material-icons animate" ng-class="{'rotate-180': showFeatures }">expand_less</md-icon>
+                </div>
+            </md-list-item>
+            <md-list-item ng-repeat="feature in features" class="animate-repeat" ng-if="showFeatures">
+                <p style="line-height: 40px;">
+                    <img ng-src="https://pubhubmediaprod.blob.core.windows.net/features/{{feature.FeatureId}}.svg" alt="feature.DisplayName" style="height:32px; vertical-align: middle;" /> 
+                    <span>{{feature.DisplayName}}</span>
+                </p>
+                <md-checkbox class="md-secondary" ng-model="feature.selected"></md-checkbox>
+            </md-list-item>
+        </md-list>
+    </md-content>
+
+</md-sidenav>
+

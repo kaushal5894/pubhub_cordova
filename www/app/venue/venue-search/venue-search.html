@@ -1,0 +1,33 @@
+﻿<nav-menu></nav-menu>
+<md-content layout="row">
+    <ng-form name="venueSearchForm">
+        <div layout-gt-xs="row">
+            <form name="keywordForm" ng-submit="hideKeyboard()">
+                <md-input-container class="md-block" flex md-no-float style="margin-bottom: 0;">
+                    <md-icon>search</md-icon>
+                    <input name="searchKeyWorks" placeholder="Enter Keywords to Search" ng-model="searchKeyWords">
+                </md-input-container>
+            </form>
+        </div>
+        <md-content layout-padding>
+            <span class="md-caption">
+                Enter keywords to perform a quick search.  You can enter multiple key words to get the best results. e.g. 'Sydney Happy Hour Pool Table'
+            </span>
+        </md-content>
+        <md-list layout="row" layout-wrap>
+            <md-list-item ng-repeat="feature in features" flex="33">
+                    <p class="small" style="text-align: center; width: 100%;">
+                    <img ng-src="https://pubhubmediaprod.blob.core.windows.net/features/{{feature.FeatureId}}.svg" alt="feature.DisplayName" style="height:32px; vertical-align: middle;" /> 
+                    <br/>
+                    {{feature.DisplayName}}
+                </p>
+                    <md-checkbox class="md-secondary" aria-label="{{feature.DisplayName}}"
+                                 value="{{feature.FeatureId}}"
+                                 ng-model="feature.isSelected"></md-checkbox>
+            </md-list-item>
+        </md-list>
+        <md-content layout="row">
+            <md-button class="md-raised md-primary" ng-click="search()" flex>Search</md-button>
+        </md-content>
+    </ng-form>
+</md-content>
