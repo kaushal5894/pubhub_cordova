@@ -769,8 +769,7 @@ angular.module('PubHub')
                     return $q.when(currentLocation);
                 }
 
-                return $q(function (resolve, reject) {
-                    debugger
+                return $q(function (resolve, reject) {                    
                     if (navigator.geolocation) {
                         var location_timeout = setTimeout("geolocFail()", 10000);
                         navigator.geolocation.getCurrentPosition(function (position) { 
@@ -871,8 +870,7 @@ angular.module('PubHub')
 
             }
 
-            this.getWhatsOnForCards = function () {
-                debugger
+            this.getWhatsOnForCards = function () {                
                 return getCurrentLocation().then(
                     function (currentLocation) {
                         var url = baseURLv1 +

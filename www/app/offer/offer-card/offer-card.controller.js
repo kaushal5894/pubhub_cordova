@@ -23,8 +23,7 @@ angular.module('todaysOffers')
 
             
 
-            $scope.openVenue = function (offer) {
-                debugger
+            $scope.openVenue = function (offer) {                
                 if (offer.OfferId) {
                     $location.path('/venues/' + offer.venueId + '/' + 0);
 
