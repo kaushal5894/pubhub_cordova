@@ -8,7 +8,7 @@ angular.module('PubHub')
             //var baseURL = 'http://localhost:59952';
             var currentLocation = null;
             this.mapPosition = null;
-            
+
 
             this.register = function (email, password) {
 
@@ -40,13 +40,13 @@ angular.module('PubHub')
 
             }
 
-            if($location.path() == '/landing'){
+            if ($location.path() == '/landing') {
                 this.isAuthenticated = false;
-            }else{
+            } else {
                 this.isAuthenticated = true;
             }
 
-            
+
             this.isPreview = false;
 
             this.getVenuesForMap = function (center, cancel, features, searchText) {
@@ -292,7 +292,7 @@ angular.module('PubHub')
                                 "/Offers/" + offerId +
                                  '?longitude=' + currentLocation.longitude +
                                 '&latitude=' + currentLocation.latitude
-                      
+
 
                         return $http({
                             method: 'GET',
@@ -697,7 +697,7 @@ angular.module('PubHub')
                     method: 'GET',
                     url: /*"http://pubhub-prod-webapi.azurewebsites.net/api/v1/whatson?longitude=151.20567&latitude=-33.8404"*/baseURL +
                         "/OfferCategories?$expand=OfferSubcategories"
-                        //"api/v1/whatson?longitude=151.20567&latitude=-33.8404"
+                    //"api/v1/whatson?longitude=151.20567&latitude=-33.8404"
                 }).then(function successCallback(response) {
                     offerCategories = response.data.value;
                     return offerCategories;
@@ -769,10 +769,10 @@ angular.module('PubHub')
                     return $q.when(currentLocation);
                 }
 
-                return $q(function (resolve, reject) {                    
+                return $q(function (resolve, reject) {
                     if (navigator.geolocation) {
                         var location_timeout = setTimeout("geolocFail()", 10000);
-                        navigator.geolocation.getCurrentPosition(function (position) { 
+                        navigator.geolocation.getCurrentPosition(function (position) {
                             //var lat = position.coords.latitude;
                             //var lng = position.coords.longitude;
                             //$rootScope.lat = lat;
@@ -870,7 +870,7 @@ angular.module('PubHub')
 
             }
 
-            this.getWhatsOnForCards = function () {                
+            this.getWhatsOnForCards = function () {
                 return getCurrentLocation().then(
                     function (currentLocation) {
                         var url = baseURLv1 +
@@ -910,5 +910,57 @@ angular.module('PubHub')
                             });
                     });
             }
+            this.getVenuesList = function () {
+                return getCurrentLocation().then(
+                    function (currentLocation) {
+                        var url = baseURLv1 +
+                            'venues' +
+                             '?longitude=' + currentLocation.longitude +
+                             '&latitude=' + currentLocation.latitude
+                        //url = getOfferFilter(url);
+
+                        //url += "&$top=" + top +
+                        //        "&$skip=" + skip;
+
+                        return $http({
+                            method: 'GET',
+                            url: url
+
+                        }).then(function successCallback(response) {
+                            return response.data;
+                        },
+                            function errorCallback(response) {
+                                // called asynchronously if an error occurs
+                                // or server returns response with an error status.
+                            });
+                    });
+            }
 
         })
+
+
+//this.getVenuesList =function(){
+//    return getCurrentLocation().then(
+//        function (currentLocation) {                    
+
+//        var url = baseURLv1 +
+//            'venues' +
+//            '?longitude=' +currentLocation.longitude +
+//            '&latitude=' + currentLocation.latitude
+
+//        return $http({
+//            method: 'GET',                        
+//            url: url                        
+//        }).then(function successCallback(response) {
+
+//            return response.data;
+//        },
+//            function errorCallback(response) {
+
+//                console.debug(response);
+//                // called asynchronously if an error occurs
+//                // or server returns response with an error status.
+//            });
+
+//    });
+//}

@@ -1,5 +1,5 @@
 ﻿angular.module('venueList')
-  .controller('VenueListController', function (pubhub, $filter) {
+  .controller('VenueListController', function (pubhub, $filter, spinnerService) {
       var $ctrl = this;
 
       this.sortSuburb = function (venues) {
@@ -7,8 +7,8 @@
 
           return sorted[0].distance;
       }
-
-       this.addToFavourites = function (venue) {
+      spinnerService.hideSpinner();
+      this.addToFavourites = function (venue) {
           pubhub.addFavVenue(venue);
       }
 
