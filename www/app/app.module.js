@@ -15,6 +15,7 @@ angular.module('PubHub', [
   'venueInfo',
   'offerListItem',
   'offerList',
+  'offerCard',//New Added
   'eventListItem',
   'eventList',
   'eventSearch',

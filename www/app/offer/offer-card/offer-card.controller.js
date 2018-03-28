@@ -1,29 +1,27 @@
-﻿
-
-angular.module('todaysOffers')
+﻿angular.module('offerCard')//'todaysOffers'
     .controller('OfferCardController',
         function ($scope, $http, $location, pubhub, $mdToast, $timeout, navMenuService, $mdSidenav, $routeParams) {
             var $ctrl = this;
-
-            //if (!$ctrl.offer) {
-
-            pubhub.isPreview = true;
-
-            //pubhub.getOffer($routeParams.offerId).then(function (data) {
-            pubhub.getWhatsOnForCards().then(function (data) {
-                console.debug(data);
-                $ctrl.offer = data;
-                if ($ctrl.offer && !angular.isArray($ctrl.offer)) {
-                    pubhub.getVenue($ctrl.offer.venueId).then(function (data) {
-                        $ctrl.offer.Venue = data;
-                    })
-                }                
-            });
-            //}
-
             
+            if (!$ctrl.offer) {
 
-            $scope.openVenue = function (offer) {                
+                pubhub.isPreview = true;
+
+                pubhub.getOffer($routeParams.offerId).then(function (data) {
+                    console.debug(data);
+                    $ctrl.offer = data;
+                });
+            }
+
+            if ($ctrl.offer && !$ctrl.offer.Venue) {
+                pubhub.getVenue($ctrl.offer.venueId).then(function (data) {
+                    $ctrl.offer.Venue = data;
+                })
+            }
+
+
+
+            $scope.openVenue = function (offer) {
                 if (offer.OfferId) {
                     $location.path('/venues/' + offer.venueId + '/' + 0);
 

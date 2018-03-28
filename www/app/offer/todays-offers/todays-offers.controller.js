@@ -4,42 +4,42 @@ angular.module('todaysOffers')
     .controller('FilterModalController',
         function ($scope, $http, $location, pubhub, $mdToast, $timeout, $mdDialog) {
 
-        $scope.hide = function() {
-            $mdDialog.hide();
-        };
-        $scope.cancel = function() {
-            $mdDialog.cancel();
-        };
-        $scope.answer = function(answer) {
-            $mdDialog.hide(answer);
-        };
+            $scope.hide = function () {
+                $mdDialog.hide();
+            };
+            $scope.cancel = function () {
+                $mdDialog.cancel();
+            };
+            $scope.answer = function (answer) {
+                $mdDialog.hide(answer);
+            };
 
-        var categories = pubhub.getOfferCategories();
-        categories.then(function(data){
-            console.log(data)
-            $scope.categories = [];
-            data.forEach(function(d){
-              $scope.categories.push({
-                'OfferCategoryId': d.OfferCategoryId, 
-                'DisplayName': d.DisplayName,
-                'isSelected': false
-              });
-            });     
-        });
+            var categories = pubhub.getOfferCategories();
+            categories.then(function (data) {
+                console.log(data)
+                $scope.categories = [];
+                data.forEach(function (d) {
+                    $scope.categories.push({
+                        'OfferCategoryId': d.OfferCategoryId,
+                        'DisplayName': d.DisplayName,
+                        'isSelected': false
+                    });
+                });
+            });
 
-        $scope.selCategory = function(indx){  
-            if($scope.categories[indx]['isSelected']){
-              $scope.categories[indx]['isSelected'] = false;  
-            }else{
-              $scope.categories[indx]['isSelected'] = true;  
+            $scope.selCategory = function (indx) {
+                if ($scope.categories[indx]['isSelected']) {
+                    $scope.categories[indx]['isSelected'] = false;
+                } else {
+                    $scope.categories[indx]['isSelected'] = true;
+                }
             }
-        }
 
-        $scope.search = function(){
-            console.log("Search");
-        };
+            $scope.search = function () {
+                console.log("Search");
+            };
 
-    })
+        })
     .controller('TodaysOffersController',
         function ($scope, $http, $location, pubhub, $mdToast, $timeout, navMenuService, $mdSidenav, $filter, $mdDialog) {
 
@@ -47,7 +47,7 @@ angular.module('todaysOffers')
                 $location.path('/venues/' + offer.VenueId + '/' + 0);
             }
 
-           
+
 
             $scope.addFavourite = function (offer) {
                 //var pinTo = {
@@ -122,8 +122,8 @@ angular.module('todaysOffers')
 
                 if (!day.data || refresh) {
 
-                    pubhub.getTodaysOffers(day).then(function (data) {
-                        day.data = data;
+                    pubhub.getTodaysOffers(day).then(function (data) {                  
+                        day.data = data;                        
                     });
                 }
             }
@@ -208,21 +208,21 @@ angular.module('todaysOffers')
             $scope.openFilter = function (ev) {
 
                 $mdDialog.show({
-                  controller: 'FilterModalController',
-                  templateUrl: 'app/offer/todays-offers/filter-modal.tmpl.html',
-                  parent: angular.element(document.body),
-                  targetEvent: ev,
-                  clickOutsideToClose:true,
-                  fullscreen: 'sm'
+                    controller: 'FilterModalController',
+                    templateUrl: 'app/offer/todays-offers/filter-modal.tmpl.html',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose: true,
+                    fullscreen: 'sm'
                 })
-                .then(function(answer) {
-                  $scope.status = 'You said the information was "' + answer + '".';
-                }, function() {
-                  $scope.status = 'You cancelled the dialog.';
+                .then(function (answer) {
+                    $scope.status = 'You said the information was "' + answer + '".';
+                }, function () {
+                    $scope.status = 'You cancelled the dialog.';
                 });
-                $scope.$watch(function() {
+                $scope.$watch(function () {
                     //
-                }, function(wantsFullScreen) {
+                }, function (wantsFullScreen) {
                     //
                 });
             }
