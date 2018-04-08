@@ -32,6 +32,7 @@ angular.module('landingForm')
         if(typeof storage.getItem('picture') !== 'undefined' && storage.getItem('picture') != null) {
             return false;
         }
+        facebookConnectPlugin.browserInit('2110725365827435');
           console.log('Login');
           // FB.getLoginStatus(function(response) {
           //   console.log(response);

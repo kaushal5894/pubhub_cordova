@@ -910,13 +910,17 @@ angular.module('PubHub')
                             });
                     });
             }
-            this.getVenuesList = function () {
+            this.getVenuesList = function (features) {
                 return getCurrentLocation().then(
                     function (currentLocation) {
                         var url = baseURLv1 +
                             'venues' +
                              '?longitude=' + currentLocation.longitude +
                              '&latitude=' + currentLocation.latitude
+
+                        if (features != undefined && features != '' && features != null) {
+                            url += features;
+                        }
                         //url = getOfferFilter(url);
 
                         //url += "&$top=" + top +
