@@ -3,8 +3,8 @@ angular.module('PubHub')
         function ($filter, $http, $q, $rootScope, $location) {
             var me = this;
 
-            var baseURL = 'https://pubhub-api-prod.azurewebsites.net/';
-            var baseURLv1 = 'https://pubhub-prod-webapi.azurewebsites.net/api/v1/';
+            var baseURL = 'http://pubhub-api-prod.azurewebsites.net/';
+            var baseURLv1 = 'http://pubhub-prod-webapi.azurewebsites.net/api/v1/';
             //var baseURL = 'http://localhost:59952';
             var currentLocation = null;
             this.mapPosition = null;
@@ -917,6 +917,37 @@ angular.module('PubHub')
                             'venues' +
                              '?longitude=' + currentLocation.longitude +
                              '&latitude=' + currentLocation.latitude
+
+                        if (features != undefined && features != '' && features != null) {
+                            url += features;
+                        }
+                        //url = getOfferFilter(url);
+
+                        //url += "&$top=" + top +
+                        //        "&$skip=" + skip;
+
+                        return $http({
+                            method: 'GET',
+                            url: url
+
+                        }).then(function successCallback(response) {
+                            return response.data;
+                        },
+                            function errorCallback(response) {
+                                // called asynchronously if an error occurs
+                                // or server returns response with an error status.
+                            });
+                    });
+            }
+            this.getSearchVenuesList = function (location,features) {
+                return getCurrentLocation().then(
+                    function (currentLocation) {
+                        var url = baseURLv1 +
+                            'search/location' +
+                             '?search.currentLocation.longitude=' + currentLocation.longitude +
+                             '&search.currentLocation.latitude=' + currentLocation.latitude;
+                        if (location != undefined)
+                            url += '&search.searchLocation=' + location;
 
                         if (features != undefined && features != '' && features != null) {
                             url += features;

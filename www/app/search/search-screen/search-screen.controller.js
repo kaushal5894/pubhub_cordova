@@ -83,7 +83,7 @@
               } else {
                   url += '&'
               }
-              url += 'features=' + value.FeatureId;
+              url += 'search.features=' + value.FeatureId;
           });
 
           if ($scope.searchKeyWords) {
@@ -92,7 +92,7 @@
               } else {
                   url += '&'
               }
-              url += 'q=' + $scope.searchKeyWords;
+              url += 'location=' + $scope.searchKeyWords;
           }
           
           $location.url(url);
