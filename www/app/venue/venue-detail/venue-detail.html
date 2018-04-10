@@ -1,4 +1,5 @@
-﻿<div layout="row">
+﻿<nav-menu></nav-menu>
+<div layout="row">
     <ul ng-if="venue.images && venue.images.length" rn-carousel class="image" rn-carousel-index="carouselIndex" rn-carousel-auto-slide rn-carousel-pause-on-hover rn-carousel-buffered>
         <li ng-repeat="img in venue.images">
             <img ng-src="{{ $ctrl.getCarouselImage(img) }}"  onerror="this.src='images/missing_banner.png'" alt="{{venue.displayName}}" />
